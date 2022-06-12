@@ -11,10 +11,7 @@
             <div class="alert-warning mt-3", class="container">
                 <h3>{{ el.title }}</h3>
                 <p>{{ el.task }}</p>
-                {% block pagination %}
-                {% include 'Blog/pagination.html' %}
             </div>
-    {% endblock %}
         {% endfor %}
     {% else %}
                 <p>У нас нет записей</p>

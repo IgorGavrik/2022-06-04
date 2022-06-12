@@ -1,13 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Task
 from .forms import TaskForm
-from django.views.generic import ListView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
-
-class TaskViewList(ListView):
-    paginate_by = 3
-    model = Task
 
 
 def index(request):
@@ -23,12 +17,14 @@ def index(request):
         tasks = paginator.page(1)
     except EmptyPage:
         tasks = paginator.page(paginator.num_pages)
-    context = {'title': 'Главная страница сайта', 'tasks': tasks, 'page': page}
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'title': 'Главная страница сайта', 'tasks': tasks, 'page_obj': page_obj}
     return render(request, 'Blog/index.html', context)
 
 
-def about(request):
-    return render(request, 'Blog/about.html')
+def registration(request):
+    return render(request, 'Blog/registration.html')
 
 
 def post(request):
