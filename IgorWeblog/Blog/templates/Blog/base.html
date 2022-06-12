@@ -15,13 +15,39 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'index' %}">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'about' %}">О нас</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'post' %}">Добавить пост</a>
       </nav>
     </div>
 
     <div class="container">
         {% block content %}{% endblock %}
+    <nav id="pagination" class="col align-self-center" aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</span></li>
+            {% endif %}
+            {% for p in paginator.page_range %}
+            {% if p > page_obj.number|add:-2 and p < page_obj.number|add:2 %}
+                {% endif %}
+<!--            {% if page_obj.number == p  %}-->
+                <li class="page-num page-num-selected">{{ p }}</li>
+<!--            {% else %}
+                <li class="page-num"><a href="?page={{ p }}">{{ p }}</a>></li>
+<!--            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">{{ p }}<span class="sr-only">(current)</span></a></li>           <li class="page-item">
+                <a class="page-link" href="?page={{ p }}">{{ p }}</a></li>-->
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link" href="#" tabindex="-1" aria-disabled="true">&raquo;</span></li>
+            {% endif %}
+        </ul>
+    </nav>
     </div>
 </body>
 </html>
