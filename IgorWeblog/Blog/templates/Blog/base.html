@@ -30,14 +30,15 @@
                 <li class="page-item disabled"><span class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</span></li>
             {% endif %}
             {% for p in paginator.page_range %}
-            {% if p > page_number|add:-2 and p < page_number|add:2 %}
+            {% if p > page_obj.number|add:-2 and p < page_obj.number|add:2 %}
                 {% endif %}
-            {% if p == page_number %}-->
-                <li class="page-num page-num-selected">{{ page_number }}</li>
-            {% else %}
-                <li class="page-num"><a href="?page={{ page_number }}">{{ page_number }}</a>></li>
-                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ page_number }}<span class="sr-only">(current)</span></a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% if p == page_obj.number %}-->
+                <li class="page-num page-num-selected">{{ p }}</li>
+<!--            {% else %}
+                <li class="page-num"><a href="?page={{ p }}">{{ p }}</a>></li>
+<!--            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">{{ p }}<span class="sr-only">(current)</span></a></li>           <li class="page-item">
+                <a class="page-link" href="?page={{ p }}">{{ p }}</a></li>-->
                 {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
