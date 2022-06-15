@@ -19,7 +19,7 @@ def index(request):
         tasks = paginator.page(paginator.num_pages)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'title': 'Блог главная', 'tasks': tasks, 'page_obj': page_obj, 'page_number': page_number}
+    context = {'title': 'Блог главная', 'tasks': tasks, 'page_obj': page_obj, 'page_number': page_number, 'page': page}
     return render(request, 'Blog/index.html', context)
 
 
