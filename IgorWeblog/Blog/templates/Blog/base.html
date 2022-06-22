@@ -9,36 +9,27 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">IgorWeblog</span>
-      </a>
+        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <span class="fs-4"> IgorWeblog </span></a>
 
-      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'index' %}">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'post' %}">Добавить пост</a>
-      </nav>
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'index' %}">Главная</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'post' %}">Добавить пост</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'login' %}">Авторизация</a>
+            <a button type="submit" class="btn btn-success" style="background:blue" href="{% url 'index' %}">Выйти</a>
+        </nav>
     </div>
-
+<a>Приветствую, {{ user.username|default:'Guest' }}</a>
+        <div>
+            {% if user.is.authenticated %}
+                <a>Пользователь зарегистрирован</a>
+            {% else %}
+                <a>Не зарегистрирован</a>
+            {% endif %}
+        </div>
     <div class="container">
         {% block content %}{% endblock %}
-    <nav id="pagination" class="col align-self-center" aria-label="Page navigation example">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</span></li>
-            {% endif %}
-            <li>{{ page_obj }}</li>
-            {% if page_obj.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link" href="#" tabindex="-1" aria-disabled="true">&raquo;</span></li>
-            {% endif %}
-
-        </ul>
-    </nav>
-    </div>
 </body>
 </html>
 

@@ -1,0 +1,38 @@
+{% extends 'Blog/base.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+       <h1>Авторизация пользователя</h1>
+<hr>
+<div>
+
+    <b>{{errors}}</b>
+
+</div>
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="form-group col-5">
+        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Введите Ваш email">
+    </div>
+    <div class="form-group mt-4 col-5">
+        <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Пароль">
+    </div>
+    <div class="form-group mt-4">
+        <div class="custom-control custom-checkbox small">
+            <input type="checkbox" class="custom-control-input" id="customCheck">
+            <label class="custom-control-label" for="customCheck">Запомнить меня</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-sucsess mt-4" style="background:lightblue">
+            Авторизоваться. Войти
+    </button>
+    <span>{{ error }}</span>
+</form>
+<hr>
+<div class="text-center">
+    <a class="small" href="registration">Пройти регистрацию!</a>
+</div>
+{% endblock %}

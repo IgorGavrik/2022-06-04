@@ -9,10 +9,13 @@ class TaskForm(ModelForm):
         widgets = {
             "title": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': "Введите название"
+                'placeholder': "Введите заголовок"
             }),
             "task": Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите описание'
+                'placeholder': 'Введите текст поста'
             })
         }
+
+
+#class UserCreation(UserCreationForm)

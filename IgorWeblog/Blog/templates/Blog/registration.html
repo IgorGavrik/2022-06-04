@@ -5,6 +5,36 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Регистрация</h1>
-    <p>Страница регистрации пользователей<p>
+    <h1>Регистрация пользователя</h1>
+<hr>
+        <form class="user" method="post" action="">
+            {% csrf_token %}
+        <div class="form-group">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <input type="text" name="first_name" class="form-control form-control-user" id="exampleFirstName" placeholder="Имя">
+            </div>
+            <div class="col-sm-6 mt-4">
+                <input type="text" name="last_name" class="form-control form-control-user" id="exampleLastName" placeholder="Фамилия">
+            </div>
+        </div>
+        <div class="form-group col-5">
+            <input type="email" name="email" class="form-control form-control-user mt-4" id="exampleInputEmail" placeholder="Введите Email">
+        </div>
+            <div class="form-group row col-5">
+                <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
+                    <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Придумайте пароль">
+                </div>
+                <div class="col-sm-6 mt-4">
+                    {{ re_password }}
+                    <input type="password" name="re_password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Повторите пароль">
+                </div>
+            </div>
+        <input type="submit" class="btn btn-sucsess mt-4" style="background:lightblue" value="Зарегистрировать">
+        <span>{{ error }}</span>
+    </form>
+<hr>
+<div class="text-center">
+    <a class="small" href="login">Уже зарегистрированы. Авторизоваться!</a>
+</div>
+
 {% endblock %}
