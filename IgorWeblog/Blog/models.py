@@ -9,7 +9,7 @@ class Task(models.Model):
     task = models.TextField('Текст')
     created_dt = models.DateTimeField('Дата', auto_now=True)
     publish = models.DateTimeField('Публикация', default=timezone.now)
-    slug = models.SlugField('Ссылка', max_length=250, unique=True)
+    slug = models.SlugField('Ссылка', max_length=250, unique=True, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.publish)
