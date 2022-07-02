@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Task(models.Model):
@@ -7,8 +8,8 @@ class Task(models.Model):
     title = models.CharField('Название', max_length=50)
     task = models.TextField('Текст')
     created_dt = models.DateTimeField('Дата', auto_now=True)
-    slug = models.SlugField('Ссылка', max_length=250, unique_for_date='publish')
     publish = models.DateTimeField('Публикация', default=timezone.now)
+    slug = models.SlugField('Ссылка', max_length=250, unique_for_date='publish')
 
     def __str__(self):
         return self.title
