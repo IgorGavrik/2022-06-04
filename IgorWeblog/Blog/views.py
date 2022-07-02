@@ -1,11 +1,12 @@
+from urllib import request
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
 
 from .models import Task
 from .forms import TaskForm
@@ -43,6 +44,7 @@ class RegistrationView(View, UserCreationForm):
         data = dict(request.POST)
         if data.get('password') == data.get('re_password'):
             user = User.objects.create(
+                username=data.get('email'),
                 first_name=data.get('first_name'),
                 last_name=data.get('last_name'),
                 email=data.get('email'),
@@ -77,10 +79,12 @@ class Login(LoginView):
         return render(request, 'Blog/login.html', {"error": "Что-то не так"})
 
 
-def logout(request):
-    logout(request)
-    return redirect('Blog/logout.html')
-
+class Logout(LogoutView):
+    def get(self, request):
+        if request.user:
+            return render(request, 'Blog/logout.html')
+        else:
+            return redirect('/')
 
 def post(request):
     error = ''

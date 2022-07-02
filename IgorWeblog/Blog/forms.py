@@ -16,6 +16,3 @@ class TaskForm(ModelForm):
                 'placeholder': 'Введите текст поста'
             })
         }
-
-
-#class UserCreation(UserCreationForm)
