@@ -1,13 +1,11 @@
-from urllib import request
-
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.http import request
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-
 from .models import Task
 from .forms import TaskForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -33,7 +31,6 @@ def index(request):
 
 
 class RegistrationView(View, UserCreationForm):
-
     def get(self, request):
         if request.user:
             return render(request, 'Blog/registration.html')
@@ -86,6 +83,7 @@ class Logout(LogoutView):
         else:
             return redirect('/')
 
+
 def post(request):
     error = ''
     if request.method == 'POST':
@@ -98,3 +96,8 @@ def post(request):
     form = TaskForm()
     context = {'form': form, 'error': error}
     return render(request, 'Blog/post.html', context)
+
+
+def post_detail(request, article):
+    tasks = get_object_or_404(Task, slug=article)
+    return render(request, 'Blog/article_detail.html', {'article': article})

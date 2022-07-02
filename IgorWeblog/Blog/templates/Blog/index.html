@@ -12,6 +12,7 @@
                 <h3>{{ el.title }}</h3>
                 <b>{{ el.task }}</b>
                 <p>{{ el.created_dt }}</p>
+                <li><a href="{{ article_detail.get_absolute_url }}">Подробнее</a></li>
             </div>
         {% endfor %}
     {% else %}

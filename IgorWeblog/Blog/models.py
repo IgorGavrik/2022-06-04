@@ -9,7 +9,7 @@ class Task(models.Model):
     task = models.TextField('Текст')
     created_dt = models.DateTimeField('Дата', auto_now=True)
     publish = models.DateTimeField('Публикация', default=timezone.now)
-    slug = models.SlugField('Ссылка', max_length=250, unique=True, blank=True, null=True)
+    slug = models.SlugField('Ссылка', max_length=250, unique=True, blank=True, null=True, db_index=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.publish)
@@ -21,3 +21,18 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+
+# class Article(models.Model):
+#     title = models.CharField('Название', max_length=50)
+#     task = models.TextField('Текст')
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(args, kwargs)
+#         self.slug = None
+#
+#     def __str__(self):
+#         return self.title
+#
+#     def get_absolute_url(self):
+#         return reverse('article_detail', args=self.slug)
