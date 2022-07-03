@@ -12,7 +12,7 @@
                 <h3>{{ el.title }}</h3>
                 <b>{{ el.task }}</b>
                 <p>{{ el.created_dt }}</p>
-                <li><a href="{{ post_detail.save }}">Подробнее</a></li>
+                <li><a href="/article_detail/{{el.slug}}">Подробнее</a></li>
             </div>
         {% endfor %}
     {% else %}

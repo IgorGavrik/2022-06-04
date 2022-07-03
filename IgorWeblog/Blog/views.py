@@ -98,6 +98,6 @@ def post(request):
     return render(request, 'Blog/post.html', context)
 
 
-def post_detail(request, post, slug):
-    post == get_object_or_404(Task, slug=post_detail())
+def post_detail(request, slug):
+    post == get_object_or_404(Task, slug=slug)
     return render(request, 'Blog/article_detail.html', {'slug': slug})
