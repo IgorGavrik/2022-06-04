@@ -2,7 +2,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
@@ -98,6 +97,7 @@ def post(request):
     return render(request, 'Blog/post.html', context)
 
 
-def post_detail(request, slug):
-    post == get_object_or_404(Task, slug=slug)
-    return render(request, 'Blog/article_detail.html', {'slug': slug})
+def article_detail(request, slug):
+    article = get_object_or_404(Task, slug=slug)
+    context = {'article': article, 'slug': slug, 'title':'Yfpdfybt'}
+    return render(request, 'Blog/article_detail.html', context)

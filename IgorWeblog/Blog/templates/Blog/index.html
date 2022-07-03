@@ -7,12 +7,12 @@
 {% block content %}
     <h1>Страница блога</h1>
     {% if tasks %}
-        {% for el in tasks %}
+        {% for i in tasks %}
             <div class="alert-warning mt-3", class="container">
-                <h3>{{ el.title }}</h3>
-                <b>{{ el.task }}</b>
-                <p>{{ el.created_dt }}</p>
-                <li><a href="/article_detail/{{el.slug}}">Подробнее</a></li>
+                <h3>{{ i.title }}</h3>
+                <b>{{ i.task }}</b>
+                <p>{{ i.created_dt }}</p>
+                <li><a href="/article_detail/{{i.slug}}">Подробнее</a></li>
             </div>
         {% endfor %}
     {% else %}

@@ -8,5 +8,5 @@ urlpatterns = [
     path('login', Login.as_view(), name='login'),
     path('logout', views.Logout.as_view(), name='logout'),
     path('post', views.post, name='post'),
-    path('article_detail/<slug:slug>/', views.post_detail, name='post_detail'),
+    path('article_detail/<slug:slug>/', views.article_detail, name='article_detail'),
 ]
