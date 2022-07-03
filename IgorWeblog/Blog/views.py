@@ -5,8 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from .models import Task
-from .forms import TaskForm
+from .models import Task, Comment
+from .forms import TaskForm, CommentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
@@ -99,5 +99,15 @@ def post(request):
 
 def article_detail(request, slug):
     article = get_object_or_404(Task, slug=slug)
-    context = {'article': article, 'slug': slug, 'title':'Yfpdfybt'}
+    comments = article.comments.filter(active=True)
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = article
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    context = {'article': article, 'slug': slug, 'comments': comments,
+               'comment_form': comment_form}
     return render(request, 'Blog/article_detail.html', context)

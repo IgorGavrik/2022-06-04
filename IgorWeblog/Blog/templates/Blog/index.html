@@ -10,7 +10,7 @@
         {% for i in tasks %}
             <div class="alert-warning mt-3", class="container">
                 <h3>{{ i.title }}</h3>
-                <b>{{ i.task }}</b>
+                <b>{{ i.task | truncatewords:10}}</b>
                 <p>{{ i.created_dt }}</p>
                 <li><a href="/article_detail/{{i.slug}}">Подробнее</a></li>
             </div>

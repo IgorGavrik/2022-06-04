@@ -1,22 +1,45 @@
 {% extends 'Blog/base.html' %}
 
 {% block title %}
-{{ title }}
+{{ article.title }}
 {% endblock %}
 
 {% block content %}
-<div>
+<div class="alert-warning mt-3", class="container">
     <p>{{ article.publish }}</p>
-    <h3>{{ article.title }}</h3>
+    <h3>{{ article.title | upper }}</h3>
     <b>{{ article.task }}</b>
 </div>
+<br>
+<br>
+<hr>
+{% with comments.Count as total_comments %}
+    <h5>
+        {{ total_comments }} Комментарии {{ total_comments|pluralize }}
+    </h5>
+{% endwith %}
+{% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Comment {{ forloop.counter }} by {{ comment.name }}
+            {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+    </div>
+{% empty %}
+    <p>Под этой статьёй пока нет комментариев. Оставьте комментарий первым!</p>
+{% endfor %}
+<hr>
+{% if new_comment %}
+    <h2>Ваш коментарий добавлен</h2>
+{% else %}
+    <h5>Добавьте комментарий</h5>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-sucsess" style="background:lightblue">
+            Добавить</button>
+        <span>{{ error }}</span>
+    </form>
+{% endif %}
 {% endblock %}
-
-<!--{% for i in article %}-->
-<!--    <div class="alert-warning mt-3", class="container">-->
-<!--        <p>{{ i.created_dt }}</p>-->
-<!--        <h3>{{ i.title }}</h3>-->
-<!--        <b>{{ i.task }}</b>-->
-<!--        <b>{{ i.slug }}</b>-->
-<!--    </div>-->
-<!--{% endfor %}-->
