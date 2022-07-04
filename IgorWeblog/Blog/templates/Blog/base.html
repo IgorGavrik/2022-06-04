@@ -15,14 +15,11 @@
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'index' %}">Главная</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'post' %}">Добавить пост</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'login' %}">Авторизация</a>
             <a button type="submit" class="btn btn-success" style="background:blue" href="{% url 'logout' %}">Выйти</a>
         </nav>
 {% else %}
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'index' %}">Главная</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'login' %}">Авторизация</a>
         </nav>
 {% endif %}
