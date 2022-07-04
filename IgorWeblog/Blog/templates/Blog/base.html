@@ -21,21 +21,14 @@
         </nav>
     </div>
     <div class="container">
-<p>Вы авторизованы на сайте как {{ user.username|default:'Гость' }}</p>
+{% if request.user.is_authenticated %}
+    <p>Вы авторизованы как {{ user.username|default:'Гость'}}</p>
+{% else %}
+    <p>Вы не авторизованы.</p>
+{% endif %}
+<!--<p>Вы авторизованы на сайте как {{ user.username|default:'Гость' }}</p>-->
     </div>
     <div class="container">
         {% block content %}{% endblock %}
 </body>
 </html>
-
-<!--            {% for p in paginator.page_range %}
-            {% if p > page_obj|add:-2 and p < page_obj|add:2 %}
-                {% endif %}
-            {% if p == page_obj %}
-                <li class="page-num page-num-selected">{{ page_obj }}</li>
-            {% else %}
-                <li class="page-num"><a href="?page={{ page_obj }}">{{ page_obj }}</a>></li>
-                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ page_obj }}<span class="sr-only">(current)</span></a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj }}">{{ page_obj }}</a></li>
-                {% endif %}
-            {% endfor %}>!--
