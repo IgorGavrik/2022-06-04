@@ -54,7 +54,7 @@ class RegistrationView(View, UserCreationForm):
 
 
 class Login(LoginView):
-    success_url = reverse_lazy('index')
+    # success_url = reverse_lazy('index')
     success_msg = 'Вы авторизованы'
 
     def get(self, request):
