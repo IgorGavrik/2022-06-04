@@ -33,6 +33,7 @@
 {% if new_comment %}
     <h2>Ваш коментарий добавлен</h2>
 {% else %}
+{% if request.user.is_authenticated %}
     <h5>Добавьте комментарий</h5>
     <form method="post" action=".">
         {% csrf_token %}
@@ -41,5 +42,8 @@
             Добавить</button>
         <span>{{ error }}</span>
     </form>
+{% else %}
+    <p>Комментарии могут оставлять только авторизованные пользователи.</p>
+{% endif %}
 {% endif %}
 {% endblock %}
