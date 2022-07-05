@@ -1,5 +1,6 @@
+from django.contrib import auth
 from django.contrib.auth import login, authenticate, get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
@@ -37,9 +38,9 @@ class RegistrationView(View, UserCreationForm):
             return redirect('/')
 
     def post(self, request):
-        # data = dict(request.POST)
+        data = dict(request.POST)
         if request.POST.get('password') == request.POST.get('re_password'):
-            user = User.objects.create(
+            user = User.objects.create_user(
                 username=request.POST.get('email'),
                 first_name=request.POST.get('first_name'),
                 last_name=request.POST.get('last_name'),
@@ -65,9 +66,8 @@ class Login(LoginView):
     def post(self, request):
         print(request.POST)
         user = authenticate(
-            username=User.objects.get(email=request.POST.get('email')).username,
-            password=request.POST.get('password')
-        )
+                            username=User.objects.get(email=request.POST.get('email')).username,
+                            password=request.POST.get('password'))
         print(user)
         if user is not None:
             login(request, user)
