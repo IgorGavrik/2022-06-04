@@ -10,3 +10,4 @@ urlpatterns = [
     path('post', views.post, name='post'),
     path('article_detail/<slug:slug>/', views.article_detail, name='article_detail'),
 ]
+# path('registration', views.register, name='registration'),

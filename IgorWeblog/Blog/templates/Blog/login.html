@@ -12,10 +12,10 @@
     <b>{{errors}}</b>
 
 </div>
-<form method="post" action="">
+<form class="user" method="post" action="">
     {% csrf_token %}
     <div class="form-group col-5">
-        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Введите Ваш email">
+        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Введите Email">
     </div>
     <div class="form-group mt-4 col-5">
         <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Пароль">

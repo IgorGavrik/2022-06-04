@@ -1,5 +1,4 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
@@ -38,14 +37,14 @@ class RegistrationView(View, UserCreationForm):
             return redirect('/')
 
     def post(self, request):
-        data = dict(request.POST)
-        if data.get('password') == data.get('re_password'):
+        # data = dict(request.POST)
+        if request.POST.get('password') == request.POST.get('re_password'):
             user = User.objects.create(
-                username=data.get('email'),
-                first_name=data.get('first_name'),
-                last_name=data.get('last_name'),
-                email=data.get('email'),
-                password=data.get('password'),
+                username=request.POST.get('email'),
+                first_name=request.POST.get('first_name'),
+                last_name=request.POST.get('last_name'),
+                email=request.POST.get('email'),
+                password=request.POST.get('password'),
             )
             login(request, user)
             return redirect('/')
@@ -54,23 +53,23 @@ class RegistrationView(View, UserCreationForm):
 
 
 class Login(LoginView):
-    # success_url = reverse_lazy('index')
+    success_url = reverse_lazy('index')
     success_msg = 'Вы авторизованы'
 
     def get(self, request):
         if request.user:
             return render(request, 'Blog/login.html')
         else:
-            return redirect('/')
+            return redirect('index')
 
     def post(self, request):
+        print(request.POST)
         user = authenticate(
             username=User.objects.get(email=request.POST.get('email')).username,
             password=request.POST.get('password')
         )
         print(user)
-        print(request.POST)
-        if user:
+        if user is not None:
             login(request, user)
             return redirect('/')
         return render(request, 'Blog/login.html', {"error": "Что-то не так"})

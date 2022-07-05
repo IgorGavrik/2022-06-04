@@ -1,5 +1,5 @@
 from django import forms
-
+from django.contrib.auth.models import User
 from .models import Task, Comment
 from django.forms import ModelForm, TextInput, Textarea
 
@@ -38,3 +38,4 @@ class CommentForm(forms.ModelForm):
                 'placeholder': 'Введите коментарий'
             })
         }
+

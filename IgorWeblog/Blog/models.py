@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 
 class Task(models.Model):
-    title = models.CharField('Название', max_length=50)
+    title = models.CharField('Название', max_length=100)
     task = models.TextField('Текст')
     created_dt = models.DateTimeField('Дата', auto_now=True)
     publish = models.DateTimeField('Публикация', default=timezone.now)
